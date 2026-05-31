@@ -175,9 +175,9 @@ const PRODUCTS = [
   { id:"mi3",    cat:"监控", name:"小米监控 3",        emoji:"📹", qty:3,
     specs:["室内摄像机"], cond:"", price:15, unit:"/台", cmp:29, cmpLabel:"全新约", img:null },
   { id:"midual", cat:"监控", name:"小米双摄监控",      emoji:"📹", qty:1,
-    specs:["双摄像头"], cond:"", price:15, unit:"", cmp:45, cmpLabel:"全新约", img:null },
+    specs:["双摄像头"], cond:"", price:15, unit:"", cmp:45, cmpLabel:"全新约", img:"img/midual.jpg" },
   { id:"eufy",   cat:"监控", name:"eufy 监控摄像头",   emoji:"📹", qty:1,
-    specs:["安防摄像头"], cond:"", price:10, unit:"", cmp:49, cmpLabel:"全新约", img:null },
+    specs:["安防摄像头"], cond:"", price:10, unit:"", cmp:49, cmpLabel:"全新约", img:"img/eufy.jpg" },
 
   { id:"acton",  cat:"音箱", name:"Marshall Acton III",emoji:"🔊", qty:1,
     specs:["蓝牙音箱"], cond:"", price:100, unit:"", cmp:279, cmpLabel:"全新约", img:null },
@@ -190,7 +190,7 @@ const PRODUCTS = [
     specs:["27″","2K","180Hz"], cond:"", price:100, unit:"", cmp:169, cmpLabel:"全新约", img:null },
 
   { id:"t50",    cat:"清洁", name:"追觅 T50 Ultra 洗地机",emoji:"🧼", qty:1,
-    specs:["洗地机","国行转运"], cond:"", price:200, unit:"", cmp:null, cmpLabel:"全新约", img:null },
+    specs:["洗地机","国行转运"], cond:"", price:200, unit:"", cmp:null, cmpLabel:"全新约", img:"img/t50.jpg" },
 
   { id:"pcA",    cat:"主机", name:"台式主机 A",         emoji:"🎮", qty:1,
     specs:["i7-10700","RTX 3050","16G","1T SSD","无机箱"],
@@ -199,8 +199,16 @@ const PRODUCTS = [
     specs:["R5 9600X","RTX 5060","32G DDR5","1T SSD"],
     cond:"", price:800, unit:"", cmp:1050, cmpLabel:"同配置新机约", img:null },
 
+  { id:"bambu",  cat:"3D打印", name:"拓竹 A1(带 AMS)", emoji:"🖨️", qty:1,
+    specs:["3D打印机","带 AMS","送 5kg 官方 PLA"], cond:"", price:200, unit:"", cmp:459, cmpLabel:"全新约", img:"img/bambu.jpg" },
+  { id:"hp",     cat:"办公", name:"惠普打印机",        emoji:"🖨️", qty:1,
+    specs:["每月免费打印 700 张","会员到 8.31","送 500 张纸"], cond:"", price:null, unit:"", cmp:null, cmpLabel:"", img:"img/hp.jpg" },
+
   { id:"vinda",  cat:"日用", name:"维达抽纸",           emoji:"🧻", qty:1,
     specs:["软抽纸"], cond:"", price:1, unit:"/包", cmp:null, cmpLabel:"全新约", img:null },
+
+  { id:"lamp",   cat:"日用", name:"小米台灯",          emoji:"💡", qty:1,
+    specs:["护眼台灯"], cond:"", price:10, unit:"", cmp:35, cmpLabel:"全新约", img:"img/lamp.jpg" },
 ];
 
 const CATS = ["全部", ...[...new Set(PRODUCTS.map(p=>p.cat))]];
@@ -232,7 +240,7 @@ function renderGrid(){
         <div class="name">${p.name}</div>
         <div class="specs">${p.specs.map(s=>`<span>${s}</span>`).join("")}</div>
         ${p.cond?`<div class="cond">${p.cond}</div>`:""}
-        <div class="pricerow"><span class="price">${money(p.price)}<small>${p.unit||""}</small></span>${cmp}</div>
+        <div class="pricerow">${p.price==null?`<span class="price">私聊</span>`:`<span class="price">${money(p.price)}<small>${p.unit||""}</small></span>`}${cmp}</div>
         <button class="pick ${on?'on':''}" onclick="toggle('${p.id}')">${on?'✓ 已选':'+ 选购'}</button>
       </div>
     </article>`;
@@ -250,7 +258,7 @@ function renderCart(){
 function copyList(){
   const items=PRODUCTS.filter(p=>picked.has(p.id));
   if(!items.length){ toast("还没选东西哦"); return; }
-  const lines=items.map(p=>`· ${p.name} ${money(p.price)}${p.unit||""}`).join("\n");
+  const lines=items.map(p=>`· ${p.name} ${p.price==null?'私聊':money(p.price)+(p.unit||"")}`).join("\n");
   const txt=`【我想要这些二手】\n${lines}\n多买多折,能不能再便宜点?\n— 来自 Riv 的清仓页`;
   copy(txt, "清单已复制,粘贴发给微信 rivbla");
 }
