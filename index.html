@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="theme-color" content="#ffffff" />
+<title>毕业清仓 · Riv 的二手好物</title>
+<meta name="description" content="毕业回国,全部清仓。监控 / 音箱 / 显示器 / 洗地机 / 台式主机,英镑明码标价,附亚马逊参考价,伦敦面交可邮寄。微信 rivbla。" />
+<!-- 微信分享卡片 -->
+<meta property="og:type" content="website" />
+<meta property="og:title" content="毕业清仓 · Riv 的二手好物" />
+<meta property="og:description" content="监控 / 音箱 / 显示器 / 洗地机 / 台式主机,明码标价,附亚马逊参考价。微信 rivbla,伦敦面交可邮寄。" />
+<style>
+  :root{
+    --ink:#1d1d1f; --sub:#6e6e73; --line:#e7e7ec; --bg:#ffffff;
+    --band:#f5f5f7; --accent:#0071e3; --save-bg:#e9faf0; --save:#00824a;
+    --warn-bg:#fff4e5; --warn:#b15c00; --radius:18px;
+    --shadow:0 1px 2px rgba(0,0,0,.04), 0 8px 24px rgba(0,0,0,.05);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:-apple-system,BlinkMacSystemFont,"SF Pro SC","SF Pro Display","PingFang SC","Helvetica Neue","Microsoft YaHei",sans-serif;
+    color:var(--ink); background:var(--bg); line-height:1.55;
+    -webkit-font-smoothing:antialiased; padding-bottom:96px;
+  }
+  a{color:inherit;text-decoration:none}
+  .wrap{max-width:1120px;margin:0 auto;padding:0 20px}
+
+  /* 顶栏 */
+  header{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.8);
+    -webkit-backdrop-filter:saturate(180%) blur(20px);backdrop-filter:saturate(180%) blur(20px);
+    border-bottom:1px solid var(--line)}
+  .nav{display:flex;align-items:center;justify-content:space-between;height:52px}
+  .brand{font-weight:700;font-size:17px;letter-spacing:.2px}
+  .brand span{color:var(--sub);font-weight:500}
+  .wx-chip{display:inline-flex;align-items:center;gap:6px;font-size:13px;font-weight:600;
+    background:var(--ink);color:#fff;padding:7px 13px;border-radius:999px;cursor:pointer;border:none}
+  .wx-chip:active{transform:scale(.96)}
+
+  /* Hero */
+  .hero{padding:64px 0 40px;text-align:center;
+    background:radial-gradient(120% 120% at 50% 0%, #f4f9ff 0%, #fbfffe 38%, #ffffff 70%)}
+  .hero h1{font-size:clamp(32px,7vw,56px);font-weight:800;letter-spacing:-.5px;line-height:1.08}
+  .hero .lede{margin-top:14px;color:var(--sub);font-size:clamp(15px,3.4vw,19px)}
+  .meta-line{margin-top:18px;display:flex;gap:8px;justify-content:center;flex-wrap:wrap}
+  .meta-line .tag{font-size:13px;color:var(--sub);background:var(--band);padding:6px 12px;border-radius:999px}
+  .stats{margin:34px auto 0;display:grid;grid-template-columns:repeat(3,1fr);gap:10px;max-width:560px}
+  .stat{background:#fff;border:1px solid var(--line);border-radius:16px;padding:16px 10px;box-shadow:var(--shadow)}
+  .stat .k{font-size:12px;color:var(--sub)}
+  .stat .v{font-size:clamp(18px,5vw,26px);font-weight:800;letter-spacing:-.5px;margin-top:4px}
+  .stat.save .v{color:var(--save)}
+
+  /* 分类条 */
+  .cats{position:sticky;top:52px;z-index:40;background:rgba(255,255,255,.86);
+    -webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+  .cats-inner{display:flex;gap:8px;overflow-x:auto;padding:12px 20px;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+  .cats-inner::-webkit-scrollbar{display:none}
+  .chip{flex:0 0 auto;font-size:14px;font-weight:600;color:var(--ink);background:var(--band);
+    border:1px solid transparent;padding:8px 16px;border-radius:999px;cursor:pointer;white-space:nowrap}
+  .chip.active{background:var(--ink);color:#fff}
+
+  /* 网格 */
+  main{padding:28px 0 10px}
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:18px}
+  .card{background:#fff;border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;
+    display:flex;flex-direction:column;transition:transform .18s ease,box-shadow .18s ease}
+  @media(hover:hover){.card:hover{transform:translateY(-3px);box-shadow:var(--shadow)}}
+  .card.sold{opacity:.55}
+  .ph{position:relative;aspect-ratio:4/3;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px}
+  .ph img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+  .ph-emoji{font-size:46px;line-height:1}
+  .ph-cap{font-size:12px;color:var(--sub)}
+  .ribbon{position:absolute;top:12px;left:12px;background:#ff3b30;color:#fff;font-size:12px;font-weight:700;
+    padding:4px 10px;border-radius:999px;display:none}
+  .card.sold .ribbon{display:block}
+  .qty-badge{position:absolute;top:12px;right:12px;background:rgba(0,0,0,.7);color:#fff;font-size:12px;
+    font-weight:700;padding:4px 9px;border-radius:999px}
+  .body{padding:16px 16px 18px;display:flex;flex-direction:column;flex:1}
+  .ctag{font-size:12px;color:var(--accent);font-weight:700;letter-spacing:.3px}
+  .name{font-size:18px;font-weight:700;margin-top:3px;letter-spacing:-.2px}
+  .specs{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
+  .specs span{font-size:12px;color:var(--sub);background:var(--band);padding:4px 9px;border-radius:8px}
+  .cond{font-size:13px;color:var(--sub);margin-top:10px}
+  .pricerow{display:flex;align-items:baseline;gap:10px;margin-top:14px;flex-wrap:wrap}
+  .price{font-size:27px;font-weight:800;letter-spacing:-.5px}
+  .price small{font-size:14px;font-weight:600;color:var(--sub)}
+  .cmp{font-size:14px;color:var(--sub)}
+  .cmp s{opacity:.8}
+  .cmp .lab{display:block;font-size:11px}
+  .save-pill{font-size:12px;font-weight:700;color:var(--save);background:var(--save-bg);padding:3px 9px;border-radius:999px}
+  .pick{margin-top:14px;display:flex;align-items:center;justify-content:center;gap:7px;
+    font-size:15px;font-weight:700;border:1px solid var(--ink);background:#fff;color:var(--ink);
+    padding:11px;border-radius:12px;cursor:pointer;width:100%}
+  .pick:active{transform:scale(.99)}
+  .pick.on{background:var(--ink);color:#fff}
+  .card.sold .pick{display:none}
+
+  /* 联系 */
+  .contact{margin:48px 0 10px;background:var(--band);border-radius:24px;padding:40px 24px;text-align:center}
+  .contact h2{font-size:clamp(22px,5vw,30px);font-weight:800;letter-spacing:-.4px}
+  .contact p{color:var(--sub);margin-top:10px;font-size:15px}
+  .wxbig{margin-top:22px;display:inline-flex;align-items:center;gap:12px;background:#fff;border:1px solid var(--line);
+    border-radius:16px;padding:16px 22px;box-shadow:var(--shadow)}
+  .wxbig .id{font-size:22px;font-weight:800;letter-spacing:.5px}
+  .wxbig button{font-size:14px;font-weight:700;background:var(--accent);color:#fff;border:none;
+    padding:9px 16px;border-radius:10px;cursor:pointer}
+  .wxbig button:active{transform:scale(.97)}
+
+  footer{text-align:center;color:var(--sub);font-size:13px;padding:34px 20px 10px}
+
+  /* 选购悬浮条 */
+  .cart{position:fixed;left:0;right:0;bottom:0;z-index:60;transform:translateY(120%);transition:transform .28s ease;
+    background:rgba(255,255,255,.92);-webkit-backdrop-filter:blur(20px);backdrop-filter:blur(20px);
+    border-top:1px solid var(--line);box-shadow:0 -6px 24px rgba(0,0,0,.07)}
+  .cart.show{transform:translateY(0)}
+  .cart-inner{max-width:1120px;margin:0 auto;padding:12px 20px;display:flex;align-items:center;gap:14px;
+    padding-bottom:calc(12px + env(safe-area-inset-bottom))}
+  .cart .info{flex:1;min-width:0}
+  .cart .info b{font-size:16px}
+  .cart .info small{display:block;color:var(--sub);font-size:12px}
+  .cart button{flex:0 0 auto;font-size:15px;font-weight:700;border:none;border-radius:12px;padding:13px 18px;cursor:pointer}
+  .cart .copy{background:var(--ink);color:#fff}
+  .cart .clr{background:transparent;color:var(--sub);padding:13px 8px}
+
+  /* toast */
+  .toast{position:fixed;left:50%;bottom:96px;transform:translate(-50%,20px);z-index:90;
+    background:rgba(0,0,0,.86);color:#fff;font-size:14px;padding:11px 18px;border-radius:12px;
+    opacity:0;pointer-events:none;transition:all .25s ease}
+  .toast.show{opacity:1;transform:translate(-50%,0)}
+
+  @media(max-width:480px){
+    .grid{grid-template-columns:1fr}
+    .hero{padding:44px 0 30px}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap nav">
+    <div class="brand">毕业清仓 <span>· Riv</span></div>
+    <button class="wx-chip" onclick="copyWx()">微信 rivbla · 复制</button>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap">
+    <h1>毕业回国<br/>好物清仓转让</h1>
+    <p class="lede">人要走了,东西不带走。都是自用,成色实在,价格到位。</p>
+    <div class="meta-line">
+      <span class="tag">💷 英镑结算</span>
+      <span class="tag">📍 伦敦面交</span>
+      <span class="tag">📦 可邮寄</span>
+      <span class="tag">🤝 多件可议价</span>
+    </div>
+    <div class="stats">
+      <div class="stat"><div class="k">全新购入约</div><div class="v" id="s-new">£—</div></div>
+      <div class="stat"><div class="k">现在清仓</div><div class="v" id="s-now">£—</div></div>
+      <div class="stat save"><div class="k">帮你省</div><div class="v" id="s-save">£—</div></div>
+    </div>
+  </div>
+</section>
+
+<nav class="cats">
+  <div class="cats-inner" id="cats"></div>
+</nav>
+
+<main class="wrap">
+  <div class="grid" id="grid"></div>
+
+  <section class="contact" id="contact">
+    <h2>看上了就私聊我</h2>
+    <p>加微信备注「二手」。多件打包价可以谈,诚信交易,东西都在伦敦。</p>
+    <div class="wxbig">
+      <span class="id">rivbla</span>
+      <button onclick="copyWx()">复制微信号</button>
+    </div>
+  </section>
+
+  <footer>
+    东西都是自用,非诚勿扰 · 更新于 2026年5月31日
+  </footer>
+</main>
+
+<div class="cart" id="cart">
+  <div class="cart-inner">
+    <div class="info"><b id="cart-txt">已选 0 件</b><small>打包多件可私聊议价,合计为参考</small></div>
+    <button class="clr" onclick="clearPick()">清空</button>
+    <button class="copy" onclick="copyList()">复制想要清单</button>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+/* ====== 商品数据(改价格/加图片就改这里) ======
+   img: 实拍图路径或网址,填了自动替换占位图,例如 "img/acton.jpg"
+   cmp: 对比价(亚马逊或同配置新机),null 则不显示划线价
+   cmpLabel: "全新约" | "同配置新机约"
+   qty: 数量(用于顶部省钱统计) ; sold:true 显示已售并不可选            */
+const WECHAT = "rivbla";
+const PRODUCTS = [
+  { id:"mi3",    cat:"监控", name:"小米监控 3",        emoji:"📹", qty:3,
+    specs:["室内智能摄像机","高清夜视","×3 台"], cond:"九成新,功能正常",
+    price:15, unit:"/台", cmp:29, cmpLabel:"全新约", img:null },
+  { id:"midual", cat:"监控", name:"小米双摄监控",      emoji:"📹", qty:1,
+    specs:["双摄像头","广角","WiFi"], cond:"九成新,功能正常",
+    price:15, unit:"", cmp:45, cmpLabel:"全新约", img:null },
+  { id:"eufy",   cat:"监控", name:"eufy 监控摄像头",   emoji:"📹", qty:1,
+    specs:["安防摄像头","高清"], cond:"九成新,功能正常",
+    price:10, unit:"", cmp:49, cmpLabel:"全新约", img:null },
+
+  { id:"acton",  cat:"音箱", name:"Marshall Acton III",emoji:"🔊", qty:1,
+    specs:["复古蓝牙音箱","经典款","音质在线"], cond:"成色好,声音无问题",
+    price:100, unit:"", cmp:279, cmpLabel:"全新约", img:null },
+
+  { id:"u28",    cat:"显示器", name:"三星 U28R55",      emoji:"🖥️", qty:1,
+    specs:["28″","4K","60Hz"], cond:"无亮点坏点,成色好",
+    price:100, unit:"", cmp:249, cmpLabel:"全新约", img:null },
+  { id:"q27g2s", cat:"显示器", name:"AOC Q27G2S",       emoji:"🖥️", qty:1,
+    specs:["27″","2K","165Hz 电竞"], cond:"无亮点坏点,成色好",
+    price:100, unit:"", cmp:189, cmpLabel:"全新约", img:null },
+  { id:"q27g42", cat:"显示器", name:"AOC Q27G42",       emoji:"🖥️", qty:1,
+    specs:["27″","2K","180Hz 电竞"], cond:"无亮点坏点,成色好",
+    price:100, unit:"", cmp:169, cmpLabel:"全新约", img:null },
+
+  { id:"t50",    cat:"清洁", name:"追觅 T50 Ultra 洗地机",emoji:"🧼", qty:1,
+    specs:["无线洗地机","国行转运","旗舰款"], cond:"国行转运旗舰,使用过功能完好 · 原价远高于此",
+    price:200, unit:"", cmp:null, cmpLabel:"全新约", img:null },
+
+  { id:"pcA",    cat:"主机", name:"台式主机 A",         emoji:"🎮", qty:1,
+    specs:["i7-10700","RTX 3050","16G 内存","1T 固态","无机箱"],
+    cond:"无机箱裸装,正常使用完全没问题 · Apex 约 140fps",
+    price:200, unit:"", cmp:550, cmpLabel:"同配置新机约", img:null },
+  { id:"pcB",    cat:"主机", name:"台式主机 B",         emoji:"🎮", qty:1,
+    specs:["R5 9600X","RTX 5060","32G DDR5 CL28 科赋","1T 固态","RGB"],
+    cond:"高配新平台,成色好", price:800, unit:"", cmp:1050, cmpLabel:"同配置新机约", img:null },
+];
+
+/* ====== 渲染 ====== */
+const CATS = ["全部", ...[...new Set(PRODUCTS.map(p=>p.cat))]];
+const picked = new Set();
+let activeCat = "全部";
+
+function money(n){ return "£"+Math.round(n).toLocaleString("en-GB"); }
+
+function renderCats(){
+  document.getElementById("cats").innerHTML = CATS.map(c=>
+    `<button class="chip ${c===activeCat?'active':''}" onclick="setCat('${c}')">${c}</button>`).join("");
+}
+function setCat(c){ activeCat=c; renderCats(); renderGrid(); }
+
+function renderGrid(){
+  const list = PRODUCTS.filter(p=> activeCat==="全部" || p.cat===activeCat);
+  document.getElementById("grid").innerHTML = list.map(p=>{
+    const on = picked.has(p.id);
+    const savePct = p.cmp ? Math.round((1 - p.price/p.cmp)*100) : 0;
+    const img = p.img ? `<img src="${p.img}" alt="${p.name}"/>` : "";
+    const qtyB = p.qty>1 ? `<span class="qty-badge">共 ${p.qty} 台</span>` : "";
+    const cmp = p.cmp ? `<span class="cmp"><span class="lab">${p.cmpLabel}</span><s>${money(p.cmp)}</s></span>
+        <span class="save-pill">省 ${savePct}%</span>` : "";
+    return `<article class="card ${p.sold?'sold':''}" data-id="${p.id}">
+      <div class="ph" style="background:linear-gradient(160deg,#f3f6fb,#ffffff)">
+        ${img}<span class="ribbon">已售</span>${qtyB}
+        ${p.img?"":`<span class="ph-emoji">${p.emoji}</span><span class="ph-cap">实拍图待补</span>`}
+      </div>
+      <div class="body">
+        <div class="ctag">${p.cat}</div>
+        <div class="name">${p.name}</div>
+        <div class="specs">${p.specs.map(s=>`<span>${s}</span>`).join("")}</div>
+        <div class="cond">${p.cond}</div>
+        <div class="pricerow">
+          <span class="price">${money(p.price)}<small>${p.unit||""}</small></span>
+          ${cmp}
+        </div>
+        <button class="pick ${on?'on':''}" onclick="toggle('${p.id}')">${on?'✓ 已选':'+ 选购'}</button>
+      </div>
+    </article>`;
+  }).join("");
+}
+
+function renderStats(){
+  let newTotal=0, nowTotal=0;
+  PRODUCTS.forEach(p=>{
+    if(p.sold) return;
+    nowTotal += p.price*p.qty;
+    if(p.cmp) newTotal += p.cmp*p.qty;
+  });
+  document.getElementById("s-new").textContent  = money(newTotal);
+  document.getElementById("s-now").textContent  = money(nowTotal);
+  document.getElementById("s-save").textContent = money(newTotal-nowTotal);
+}
+
+/* ====== 选购 ====== */
+function toggle(id){
+  picked.has(id) ? picked.delete(id) : picked.add(id);
+  renderGrid(); renderCart();
+}
+function clearPick(){ picked.clear(); renderGrid(); renderCart(); }
+function renderCart(){
+  const cart=document.getElementById("cart");
+  const items=PRODUCTS.filter(p=>picked.has(p.id));
+  const sum=items.reduce((a,p)=>a+p.price,0);
+  cart.classList.toggle("show", items.length>0);
+  document.getElementById("cart-txt").textContent = `已选 ${items.length} 件 · 约 ${money(sum)}`;
+}
+function copyList(){
+  const items=PRODUCTS.filter(p=>picked.has(p.id));
+  if(!items.length){ toast("还没选东西哦"); return; }
+  const sum=items.reduce((a,p)=>a+p.price,0);
+  const lines=items.map(p=>`· ${p.name} ${money(p.price)}${p.unit||""}`).join("\n");
+  const txt=`【我想要这些二手】\n${lines}\n合计约 ${money(sum)}(多件能不能再优惠?)\n— 来自 Riv 的清仓页`;
+  copy(txt, "清单已复制,粘贴发给微信 rivbla 就行");
+}
+
+/* ====== 工具 ====== */
+function copyWx(){ copy(WECHAT, "微信号已复制:"+WECHAT); }
+function copy(text, ok){
+  if(navigator.clipboard && navigator.clipboard.writeText){
+    navigator.clipboard.writeText(text).then(()=>toast(ok)).catch(()=>fallback(text,ok));
+  } else fallback(text,ok);
+}
+function fallback(text, ok){
+  const t=document.createElement("textarea"); t.value=text; t.style.position="fixed"; t.style.opacity="0";
+  document.body.appendChild(t); t.focus(); t.select();
+  try{ document.execCommand("copy"); toast(ok);}catch(e){ toast("复制失败,长按手动复制");}
+  document.body.removeChild(t);
+}
+let toastTimer;
+function toast(msg){
+  const el=document.getElementById("toast"); el.textContent=msg; el.classList.add("show");
+  clearTimeout(toastTimer); toastTimer=setTimeout(()=>el.classList.remove("show"),1900);
+}
+
+renderCats(); renderGrid(); renderStats(); renderCart();
+</script>
+</body>
+</html>
